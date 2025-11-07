@@ -1,0 +1,36 @@
+@page "/todo"
+@inject ITodoService TodoService
+
+<h3>📝 To-Do List</h3>
+
+<div class="mb-3">
+    <input @bind="newTitle" placeholder="Nueva tarea..." class="form-control" />
+    <button class="btn btn-primary mt-2" @onclick="AddTodo">Agregar</button>
+</div>
+
+<ul class="list-group">
+    @foreach (var item in TodoService.GetAll())
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <input type="checkbox" checked="@item.IsDone" @onchange="() => Toggle(item.Id)" />
+                <span class="@(item.IsDone ? "text-decoration-line-through text-muted" : "")">@item.Title</span>
+            </div>
+            <button class="btn btn-sm btn-danger" @onclick="() => Remove(item.Id)">🗑️</button>
+        </li>
+    }
+</ul>
+
+@code {
+    private string? newTitle;
+
+    private void AddTodo()
+    {
+        TodoService.Add(newTitle ?? string.Empty);
+        newTitle = string.Empty;
+    }
+
+    private void Toggle(int id) => TodoService.Toggle(id);
+
+    private void Remove(int id) => TodoService.Remove(id);
+}
