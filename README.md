@@ -1,2 +1,16 @@
-# Reminder-Blazor
-Application to provide three services: 1) To Do List Reminder. 2) Daily Record. 3) Random Reminder.
+# Reminder Blazor
+
+This is the first application for the First Sprint
+
+[Software Demo Video](http://youtube.link.goes.here)
+
+# Development Environment
+
+Programming Language C#
+Framework .NET 9.0
+
+# Useful Websites
+
+{Make a list of websites that you found helpful in this project}
+
+- [Azure Portal](https://portal.azure.com/#home)
