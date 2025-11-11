@@ -1,8 +1,9 @@
 # Reminder Blazor
 
 This is the first application for the First Sprint
-
-[Software Demo Video](https://youtu.be/gx8EchZxZvU)
+# Video Link
+[Video](https://youtu.be/gx8EchZxZvU)
+# Production Link
 [Production Link](https://dailyreminder-gqbngzfeb4efhxfh.westus3-01.azurewebsites.net)
 
 # Development Environment
