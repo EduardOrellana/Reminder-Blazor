@@ -2,7 +2,7 @@
 
 This is the first application for the First Sprint
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/gx8EchZxZvU)
 
 # Development Environment
 
