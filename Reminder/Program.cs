@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
 
 //Adding serivces
 builder.Services.AddSingleton<ITodoService, TodoService>();
+builder.Services.AddSingleton<IDailyRecordService, DailyRecordService>();
 
 
 var app = builder.Build();

@@ -1,0 +1,75 @@
+@page "/dailyrecord"
+@inject Reminder.Data.IDailyRecordService DailyRecordService
+
+<h3>Daily Record</h3>
+
+<div class="card p-3">
+    <EditForm Model="@newRecord" OnValidSubmit="@SaveRecord">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label class="form-label">Date:</label>
+            <InputDate @bind-Value="newRecord.Date" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Title:</label>
+            <InputText @bind-Value="newRecord.Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Record:</label>
+            <InputTextArea @bind-Value="newRecord.Record" class="form-control" rows="4" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+</div>
+
+<hr />
+
+<h4>Previous Records</h4>
+<ul class="list-group">
+    @if (records == null)
+    {
+        <li class="list-group-item">Loading...</li>
+    }
+    else if (records.Count == 0)
+    {
+        <li class="list-group-item">No records found.</li>
+    }
+    else
+    {
+        @foreach (var record in records.OrderByDescending(r => r.Date))
+        {
+            <li class="list-group-item">
+                <strong>@record.Date.ToString("dd/MM/yyyy") - @record.Title</strong><br />
+                @record.Record
+            </li>
+        }
+    }
+</ul>
+
+@code {
+    private Reminder.Data.DailyRecord newRecord = new Reminder.Data.DailyRecord
+    {
+        Date = DateTime.Now
+    };
+    private List<Reminder.Data.DailyRecord> records = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        records = await DailyRecordService.GetAllAsync();
+    }
+
+    private async Task SaveRecord()
+    {
+        await DailyRecordService.AddAsync(newRecord);
+        records = await DailyRecordService.GetAllAsync();
+        newRecord = new Reminder.Data.DailyRecord
+        {
+            Date = DateTime.Now
+        };
+    }
+}
